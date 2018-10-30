@@ -1,0 +1,3 @@
+# DesktopDanmakuClient
+DesktopDanmaku实现了一种适用于课堂、晚会等场所的弹幕系统，分为服务端和客户端，目前只支持window平台作为客户端
+DesktopDanmakuClient 是DesktopDanmaku项目的Windows客户端.

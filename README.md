@@ -1,0 +1,2 @@
+# DesktopDanmakuClient
+DesktopDanmakuClient 是DesktopDanmaku项目的Windows客户端.

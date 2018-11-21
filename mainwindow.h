@@ -29,6 +29,8 @@ private slots:
 
     void socketDataReceive(QString msg);
 
+    void on_danmuControl_clicked();
+
 private:
 
     SocketThread* socketThread;
@@ -36,6 +38,8 @@ private:
     QThread socketContainerThread;
 
     Ui::MainWindow *ui;
+
+    int show_danmu;
 };
 
 #endif // MAINWINDOW_H

@@ -13,6 +13,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    show_danmu = 1;
     socketThread = new SocketThread();
     socketThread->moveToThread(&socketContainerThread);
     connect(&socketContainerThread,SIGNAL(finished()),socketThread,SLOT(deleteLater()));
@@ -38,13 +39,16 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::socket_Connected(){
-    qDebug() << "已连接";
+
+    qDebug() << "已连接!";
+    ui->connectState->setText("已连接");
 //    QString iamteacher = "#iamtheteacher!";
 //    emit socketSendData(iamteacher.toLocal8Bit());
 }
 
 void MainWindow::socket_Disconnected(){
-    qDebug() << "已断开";
+    qDebug() << "已断开!";
+    ui->connectState->setText("已断开");
 }
 
 void MainWindow::socketDataReceive(QString msg){
@@ -86,7 +90,10 @@ void MainWindow::socketDataReceive(QString msg){
                        if (contentValue.isString()) {
                            QString content = contentValue.toString();
                            qDebug() << "收到弹幕消息:" << content;
-                           new Danmu(this,content,"White",1,screenRect);
+                           if(show_danmu==1){
+                               new Danmu(this,content,"White",1,screenRect);
+                           }
+
                        }
 
                     }
@@ -98,3 +105,13 @@ void MainWindow::socketDataReceive(QString msg){
     }
 }
 
+
+void MainWindow::on_danmuControl_clicked()
+{
+    show_danmu = (show_danmu + 1) % 2;
+    if(show_danmu==1){
+        ui->danmuControl->setText("隐藏弹幕");
+    }else{
+        ui->danmuControl->setText("显示弹幕");
+    }
+}
